@@ -4,10 +4,10 @@ Suite Setup             Open Application MinimalTodo
 Suite Teardown          Close Application
 
 *** Variables ***
-${SERVER_URL}            http://localhost:4726/wd/hub
+${SERVER_URL}            http://localhost:4723
 ${PLATFORM}              Android
-${PLATFORM_VERSION}      10
-${DEVICE_NAME}           emulator-5556
+${PLATFORM_VERSION}      14
+${DEVICE_NAME}           emulator-5558
 ${APP_APK}               ${CURDIR}/MinimalTodo.apk
 
 ${TASK_NAME}             AutomateTest
@@ -18,13 +18,15 @@ Open Application MinimalTodo
     Open Application    ${SERVER_URL}    
     ...                 platformName=${PLATFORM}  
     ...                 platformVersion=${PLATFORM_VERSION}   
-    ...                 deviceName=${DEVICE_NAME}    
+    ...                 deviceName=${DEVICE_NAME}
+    ...                 automationName=UiAutomator2
     ...                 app=${APP_APK}
 
 Wait And Click Element 
     [Arguments]         ${locator}          ${timeout}=10s
     Wait Until Element Is Visible           ${locator}      ${timeout}
     Click Element                           ${locator}
+    Sleep     3s
 
 *** Test Cases ***
 Create New Task
